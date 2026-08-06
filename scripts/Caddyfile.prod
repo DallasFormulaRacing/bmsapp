@@ -1,0 +1,13 @@
+# Production: serve the built BMS UI on port 80 (no Vite required).
+# Installed by scripts/install-boot-services.sh -> /etc/caddy/Caddyfile
+
+{
+	auto_https off
+}
+
+:80 {
+	root * /var/www/bms-ui
+	encode gzip
+	try_files {path} /index.html
+	file_server
+}

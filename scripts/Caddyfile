@@ -1,0 +1,10 @@
+# Reverse-proxy the Vite UI on port 80 so http://berry.local works without :5173
+# Installed by scripts/setup-ui-proxy.sh -> /etc/caddy/Caddyfile
+
+{
+	auto_https off
+}
+
+:80 {
+	reverse_proxy 127.0.0.1:5173
+}

@@ -1,0 +1,14 @@
+[Unit]
+Description=BMS can0 interface (bring up before can-bridge)
+Before=can-bridge.service
+Wants=network-pre.target
+After=network-pre.target systemd-modules-load.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/bms-setup-vcan --can0-only
+ExecStop=/bin/true
+
+[Install]
+WantedBy=multi-user.target

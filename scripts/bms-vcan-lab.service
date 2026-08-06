@@ -1,0 +1,14 @@
+[Unit]
+Description=BMS lab vcan0 + cangw (for bms_emulator.py)
+After=bms-can0.service
+Wants=bms-can0.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/bms-setup-vcan --emulator
+ExecStop=/usr/local/sbin/bms-setup-vcan --teardown-lab
+
+# Manual only — not installed into any target:
+#   sudo systemctl start bms-vcan-lab
+#   sudo systemctl stop bms-vcan-lab

@@ -1,0 +1,36 @@
+# =========================
+# Node / Frontend
+# =========================
+node_modules/
+dist/
+.vite/
+
+# =========================
+# Tauri / Rust
+# =========================
+client/src-tauri/target/
+client/src-tauri/.cargo/
+server/target/
+test/.venv/
+
+# =========================
+# Environment
+# =========================
+.env
+.env.*
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS junk
+# =========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
+
+__pycache__/

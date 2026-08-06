@@ -1,0 +1,14 @@
+[Unit]
+Description=BMS CAN WebSocket bridge
+After=network-online.target bms-can0.service
+Wants=network-online.target bms-can0.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/can-bridge
+Environment=CAN_INTERFACE=can0
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
