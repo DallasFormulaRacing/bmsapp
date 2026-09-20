@@ -87,7 +87,7 @@ export interface WsEnvelope<T = BackendEventData> {
 
 export type FrontendCommand = WsEnvelope<FrontendCommandData>;
 
-export const BMS_NODE_ID = 0x1c;
+export const BMS_NODE_ID = 0x1f;
 
 /** Charging session setpoints from the Overview charging card. */
 export interface ChargingParams {
