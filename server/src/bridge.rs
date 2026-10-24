@@ -230,7 +230,7 @@ fn decode_segment_voltages(
     let mut cells = Vec::with_capacity(BMS_CELLS_PER_SEGMENT);
     for i in 0..BMS_CELLS_PER_SEGMENT {
         let mv = read_i16_be(&message.data, i * 2);
-        cells.push(Volts(mv as f32 / 1000.0));
+        cells.push(Volts(mv as f32 * 0.000150 + 1.5)); // adbms returns int16 * 150uV + 1.5V per cell
     }
 
     Ok(BmsTelemetry::SegmentVoltages {
