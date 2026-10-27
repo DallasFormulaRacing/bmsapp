@@ -69,13 +69,13 @@ pub fn can_messages_for_frontend_command(
                 return Err(ChargingEncodeError::InvalidSetpoint);
             }
 
-            let volts_deci = float_to_u16_deci(*charger_voltage)?;
-            let amps_deci = float_to_u16_deci(*charger_current)?;
+            let volts = float_to_u16(*charger_voltage)?;
+            let amps = float_to_u16(*charger_current)?;
             let delta_mv = float_to_u16(*target_delta_mv)?;
 
             let mut payload = [0u8; 6];
-            payload[0..2].copy_from_slice(&volts_deci.to_be_bytes());
-            payload[2..4].copy_from_slice(&amps_deci.to_be_bytes());
+            payload[0..2].copy_from_slice(&volts.to_be_bytes());
+            payload[2..4].copy_from_slice(&amps.to_be_bytes());
             payload[4..6].copy_from_slice(&delta_mv.to_be_bytes());
 
             Ok(vec![
@@ -119,10 +119,6 @@ pub fn bms_telemetry_poll_messages() -> Vec<DfrCanMessageBuf> {
         .iter()
         .map(|command| raspi_to_bms(*command, Vec::new()))
         .collect()
-}
-
-fn float_to_u16_deci(value: f32) -> Result<u16, ChargingEncodeError> {
-    float_to_u16(value * 10.0)
 }
 
 fn float_to_u16(value: f32) -> Result<u16, ChargingEncodeError> {
@@ -632,8 +628,8 @@ mod tests {
     #[test]
     fn encodes_start_charging_connect_then_request() {
         let frames = can_messages_for_frontend_command(&FrontendCommandData::StartCharging {
-            charger_voltage: 500.5,
-            charger_current: 12.3,
+            charger_voltage: 600.0,
+            charger_current: 30.0,
             target_delta_mv: 40.0,
         })
         .expect("setpoints should encode");
@@ -648,7 +644,7 @@ mod tests {
             frames[1].id.command,
             CanCommand::Bms(BmsCanCommand::GuiChargingRequest)
         );
-        assert_eq!(frames[1].data, vec![0x13, 0x8D, 0x00, 0x7B, 0x00, 0x28]); // 5005, 123, 40
+        assert_eq!(frames[1].data, vec![0x02, 0x58, 0x00, 0x1E, 0x00, 0x28]); // 600, 30, 40
         assert_eq!(frames[1].id.target, CanNode::Bms);
         assert_eq!(frames[1].id.source, CanNode::Raspi);
     }

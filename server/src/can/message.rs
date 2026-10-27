@@ -258,7 +258,7 @@ pub enum BmsCanCommand {
     ImdData,
     /// Raspi -> BMS: enable charging session (DLC 0).
     GuiConnect,
-    /// Raspi -> BMS: setpoints - u16 BE deci-V, u16 BE deci-A, u16 BE delta mV (DLC 6).
+    /// Raspi -> BMS: setpoints - u16 BE volts, u16 BE amps, u16 BE delta mV (DLC 6).
     GuiChargingRequest,
     /// Raspi -> BMS: disable charging session (DLC 0).
     GuiDisconnect,

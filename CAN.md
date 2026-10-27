@@ -71,7 +71,7 @@
 | `BMS_BATTERY_PACK_DATA`     | `0xB000` | ``             | pack volt, soc est, current, cell balancing stats             | `24`  |                                              |
 | `BMS_IMD_DATA`              | `0xBA01` | `???`          | IMD data                                                      | `???` | ???                                          |
 | `BMS_GUI_CONNECT`           | `0xBB01` | `???`          | Connect to laptop and start charger FSM                       | `0`   | ???                                          |
-| `BMS_GUI_CHARGING_REQUEST`  | `0xBB02` | `???`          | Send power details to ELCON                                   | `6`   | `u16 BE` deci-V, `u16 BE` deci-A, `u16 BE` delta mV (firmware reads first 4) |
+| `BMS_GUI_CHARGING_REQUEST`  | `0xBB02` | `???`          | Send power details to ELCON                                   | `6`   | `u16 BE` volts, `u16 BE` amps, `u16 BE` delta mV  |
 | `BMS_GUI_DISCONNECT`        | `0xBB03` | `???`          | Disconnect from laptop and stop charger FSM                   | `0`   | ???                                          |
 | `BMS_GUI_CHARGING_SOFTSTOP` | `0xBBFF` | `???`          | Cut power to the battery pack in a controlled way             | `0`   | ???                                          |
 
